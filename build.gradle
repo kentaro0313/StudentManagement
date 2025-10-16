@@ -30,7 +30,7 @@ dependencies {
     //便利機能、ユーティリティ
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     //Lombok
-    compileOnly 'org.apache.commons:commons-lang3:3.14.0'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     //MySQLドライバ
