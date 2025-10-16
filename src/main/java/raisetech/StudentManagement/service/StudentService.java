@@ -1,7 +1,6 @@
 package raisetech.StudentManagement.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +18,12 @@ public class StudentService {
     this.repository = repository;
   }
 
-  public List<Student> serchStudentList() {
+  public List<Student> searchStudentList() {
     // 条件検索
-    repository.search();
-
-    List<Student> over30StudentsList= new ArrayList<>();
-    //絞り込みをする。年齢が30代の人のみ抽出する。
-    for (Student student: repository.search()){
-      if(student.getAge()>30){
+    List<Student> over30StudentsList = new ArrayList<>();
+    //絞り込みをする。年齢が30歳以上の人のみ抽出する。
+    for (Student student : repository.search()) {
+      if (student.getAge() >= 30) {
         over30StudentsList.add(student);
       }
     }
@@ -34,11 +31,11 @@ public class StudentService {
     return over30StudentsList;
   }
 
-  public List<StudentsCourses> searchCoursesList(){
-    List<StudentsCourses> mathCourseList= new ArrayList<>();
+  public List<StudentsCourses> searchCoursesList() {
+    List<StudentsCourses> mathCourseList = new ArrayList<>();
     //絞り込みした「数学コース」のコース情報のみを抽出する。
-    for (StudentsCourses courses: repository.searchCourses()){
-      if(courses.getCourseName().equals("数学")){
+    for (StudentsCourses courses : repository.searchCourses()) {
+      if (courses.getCourseName().equals("数学")) {
         mathCourseList.add(courses);
       }
     }
