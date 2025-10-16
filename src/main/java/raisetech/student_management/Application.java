@@ -1,4 +1,4 @@
-package raisetech.StudentManagement;
+package raisetech.student_management;
 
 
 import org.springframework.boot.SpringApplication;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class StudentManagementApplication {
+public class Application {
 
 
   public static void main(String[] args) {
-    SpringApplication.run(StudentManagementApplication.class, args);
+    SpringApplication.run(Application.class, args);
   }
 
 
