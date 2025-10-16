@@ -35,7 +35,7 @@ public class StudentService {
     List<StudentsCourses> mathCourseList = new ArrayList<>();
     //絞り込みした「数学コース」のコース情報のみを抽出する。
     for (StudentsCourses courses : repository.searchCourses()) {
-      if (courses.getCourseName().equals("数学")) {
+      if ("数学".equals(courses.getCourseName())) {
         mathCourseList.add(courses);
       }
     }
