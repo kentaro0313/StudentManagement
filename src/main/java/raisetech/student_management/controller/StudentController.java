@@ -3,6 +3,8 @@ package raisetech.student_management.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import raisetech.student_management.controller.converter.StudentConverter;
@@ -11,7 +13,7 @@ import raisetech.student_management.data.StudentsCourses;
 import raisetech.student_management.domain.StudentDetail;
 import raisetech.student_management.service.StudentService;
 
-@RestController
+@Controller
 
 public class StudentController {
 
@@ -25,13 +27,12 @@ public class StudentController {
   }
 
   @GetMapping("/studentsList")
-  public List<StudentDetail> getStudentList() {
+  public String getStudentList(Model model) {
     List<Student> students = service.searchStudentList();
     List<StudentsCourses> studentsCourses = service.searchCoursesList();
 
-    return converter.convertStudentDetails(
-        students, studentsCourses);
-
+    model.addAttribute("studentList", converter.convertStudentDetails(students, studentsCourses));
+    return "studentList";
   }
 
 

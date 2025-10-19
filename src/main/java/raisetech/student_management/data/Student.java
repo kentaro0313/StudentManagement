@@ -12,6 +12,7 @@ public class Student {
   private String furigana;
   private String handleName;
   private String mailAddress;
+  private String area;
   private int age;
   private String gender;
   private String remark;
