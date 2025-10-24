@@ -29,6 +29,7 @@ public class StudentService {
 
   public void registerNewStudent(StudentDetail studentDetail) {
     repository.registerNewStudent(studentDetail);
+    repository.registerNewStudentCourse(studentDetail);
 
   }
 }
