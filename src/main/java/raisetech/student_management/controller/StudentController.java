@@ -20,42 +20,47 @@ import raisetech.student_management.data.StudentsCourses;
 import raisetech.student_management.domain.StudentDetail;
 import raisetech.student_management.service.StudentService;
 
+/**
+ * 受講生の検索や登録、更新などを行うREST APIとして受けつけるControllerです。
+ */
 @RestController
-
 public class StudentController {
 
   private StudentService service;
-  private StudentConverter converter;
 
   @Autowired
-  public StudentController(StudentService service, StudentConverter converter) {
+  public StudentController(StudentService service) {
     this.service = service;
-    this.converter = converter;
   }
+
+  /**
+   * 受講生一覧検索です。
+   * 全件検索を行うので、条件指定は行いません。
+   *
+   * @return　受講生一覧（全体）
+   */
 
   @GetMapping("/studentsList")
   public List<StudentDetail> getStudentList() {
-    List<Student> students = service.searchStudentList();
-    List<StudentsCourses> studentsCourses = service.searchCoursesList();
-    return converter.convertStudentDetails(students, studentsCourses);
+    return service.searchStudentList();
   }
 
-
-  @GetMapping("/newStudent")
-  public String newStudent(Model model){
-    StudentDetail studentDetail = new StudentDetail();
-    studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
-    model.addAttribute("studentDetail", studentDetail);
-    return "registerStudent";
+  /**
+   * 受講生検索です。
+   * IDに紐づく任意の受講生の情報を取得します。
+   *
+   * @param id　受講生ID
+   * @return　受講生
+   */
+  @GetMapping("/student/{id}")
+  public StudentDetail getStudent(@PathVariable String id){
+    return service.searchStudent(id);
   }
 
   @PostMapping("/registerStudent")
-  public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result){
-    if(result.hasErrors()){
-      return "registerStudent";
-    }
-    service.registerNewStudent(studentDetail);
-    return "redirect:/studentsList";
+  public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail){
+    StudentDetail responseStudentDetail = service.registerNewStudent(studentDetail);
+    return ResponseEntity.ok(responseStudentDetail) ;
   }
 
 
