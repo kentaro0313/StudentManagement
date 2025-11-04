@@ -34,17 +34,17 @@
   </insert>
 
 <!-- 受講生の更新-->
-  <insert id="updateStudent" useGeneratedKeys = "true" keyProperty = "id">
+  <update id="updateStudent" useGeneratedKeys = "true" keyProperty = "id">
     UPDATE students
     SET full_name = #{fullName}, furigana = #{furigana}, handle_name = #{handleName}, mail_address = #{mailAddress}, area = #{area}, age = #{age}, gender = #{gender}, remark =  #{remark}, is_deleted = #{isDeleted}
-    WHERE id = #{id}"
-  </insert>
+    WHERE id = #{id}
+  </update>
 
 <!-- 受講生のコース情報の更新-->
-  <insert id="updateStudentCourse" useGeneratedKeys = "true" keyProperty = "courseId">
+  <update id="updateStudentCourse" useGeneratedKeys = "true" keyProperty = "courseId">
     UPDATE students_courses
     SET course_name = #{courseName}
-    WHERE course_id = #{courseId}"
-  </insert>
+    WHERE course_id = #{courseId}
+  </update>
 
 </mapper>
