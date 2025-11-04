@@ -1,6 +1,12 @@
 package raisetech.student_management.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import java.util.List;
@@ -41,6 +47,7 @@ public class StudentController {
    *
    * @return　受講生詳細一覧（全体）
    */
+  @Operation(summary = "一覧検索", description = "受講生の一覧を検索します")
   @GetMapping("/studentsList")
   public List<StudentDetail> getStudentList() {
     return service.searchStudentList();
@@ -53,8 +60,13 @@ public class StudentController {
    * @param id　受講生ID
    * @return　受講生
    */
+  @Operation(summary = "受講生検索", description = "受講生を検索します")
   @GetMapping("/student/{id}")
-  public StudentDetail getStudent(@PathVariable @Size(min=1, max=3) String id){
+  public StudentDetail getStudent(
+      @Parameter(description = "検索したい受講生のID", example = "1")
+      @PathVariable @Size(min=1, max=3)
+      String id
+  ){
     return service.searchStudent(id);
   }
 
@@ -64,8 +76,24 @@ public class StudentController {
    * @param studentDetail　受講生詳細
    * @return　実行結果
    */
+  @Operation(summary = "受講生登録", description = "受講生を登録します",
+  requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "受講生情報",
+      required = true,
+      content = @Content(
+          schema = @Schema(implementation =  StudentDetail.class),
+          examples = @ExampleObject(
+              name = "受講生の例",
+              value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"国語\"}"
+          )
+      )
+  ))
   @PostMapping("/registerStudent")
-  public ResponseEntity<StudentDetail> registerStudent(@RequestBody @Valid StudentDetail studentDetail){
+  public ResponseEntity<StudentDetail> registerStudent(
+      @Parameter(description = "登録したい受講生の情報")
+      @RequestBody @Valid
+      StudentDetail studentDetail
+  ){
     StudentDetail responseStudentDetail = service.registerNewStudent(studentDetail);
     return ResponseEntity.ok(responseStudentDetail) ;
   }
@@ -76,15 +104,33 @@ public class StudentController {
    * @param studentDetail　受講生詳細
    * @return　実行結果
    */
+  @Operation(summary = "受講生更新", description = "受講生の情報を更新します",
+      requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+          description = "受講生情報",
+          required = true,
+          content = @Content(
+              schema = @Schema(implementation =  StudentDetail.class),
+              examples = @ExampleObject(
+                  name = "受講生の例",
+                  value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"国語\"}"
+              )
+          )
+      ))
   @PutMapping("/updateStudent")
-  public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail){
+  @ApiResponse(responseCode = "200", description = "更新が完了しました")
+  public ResponseEntity<String> updateStudent(
+      @Parameter(description = "更新内容")
+      @RequestBody
+      StudentDetail studentDetail
+  ){
     service.updateStudent(studentDetail);
     return ResponseEntity.ok("更新処理が完了しました。") ;
   }
 
 
+  @ApiResponse(responseCode = "400", description = "現在このAPIは利用出来ません。別のAPIを試してください。")
   @GetMapping("/getErrorMessage")
   public String getErrorMessage() throws TestException {
-    throw new TestException("現在このAPIは利用出来ません。別のＵＲＬを試してください。");
+    throw new TestException("現在このAPIは利用出来ません。別のAPIを試してください。");
   }
 }
