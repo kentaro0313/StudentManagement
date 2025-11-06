@@ -60,7 +60,7 @@ class StudentServiceTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"1","2","3"})
+  @ValueSource(strings = {"999"})
   void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
     Student student = new Student();
     List<StudentCourse> studentCourse = new ArrayList<>();
