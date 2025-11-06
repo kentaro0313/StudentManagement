@@ -1,23 +1,24 @@
 package raisetech.student_management.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+
+
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import raisetech.student_management.controller.converter.StudentConverter;
 import raisetech.student_management.data.Student;
@@ -50,7 +51,6 @@ class StudentServiceTest {
     when(repository.search()).thenReturn(studentList);
     when(repository.searchStudentCourseList()).thenReturn(studentCourseList);
 
-
     List<StudentDetail> actual = sut.searchStudentList();
 
     verify(repository, times(1)).search();
@@ -60,10 +60,9 @@ class StudentServiceTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"1", "2", "3"})
-  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id){
+  @ValueSource(strings = {"1","2","3"})
+  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
     Student student = new Student();
-    student.setId(id);
     List<StudentCourse> studentCourse = new ArrayList<>();
     when(repository.searchStudent(id)).thenReturn(student);
     when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourse);
@@ -77,7 +76,7 @@ class StudentServiceTest {
 
 
   @Test
-  void 受講生詳細の登録＿入力した値が適切にオブジェクトに入ること(){
+  void 受講生詳細の登録＿入力した値が適切にオブジェクトに入ること() {
     StudentDetail studentDetail = new StudentDetail();
     Student student = new Student();
     studentDetail.setStudent(student);
@@ -96,7 +95,7 @@ class StudentServiceTest {
   }
 
   @Test
-  void 受講生詳細の更新＿入力した値で適切に更新が機能すること(){
+  void 受講生詳細の更新＿入力した値で適切に更新が機能すること() {
     StudentDetail studentDetail = new StudentDetail();
     Student student = new Student();
     studentDetail.setStudent(student);
@@ -107,11 +106,10 @@ class StudentServiceTest {
     doNothing().when(repository).updateStudent(student);
     doNothing().when(repository).updateStudentCourse(studentCourse);
 
+    sut.updateStudent(studentDetail);
 
-     sut.updateStudent(studentDetail);
-
-     verify(repository, times(1)).updateStudent(student);
-     verify(repository, times(1)).updateStudentCourse(studentCourse);
+    verify(repository, times(1)).updateStudent(student);
+    verify(repository, times(1)).updateStudentCourse(studentCourse);
 //
   }
 }
