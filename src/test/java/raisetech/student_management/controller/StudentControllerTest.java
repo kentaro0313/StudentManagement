@@ -44,7 +44,7 @@ class StudentControllerTest {
   }
 
   @Test
-  void 受講生詳細の受講生で適切な値を入力した時に入力チェックに以上が発生しないこと() {
+  void 受講生詳細の受講生で適切な値を入力した時に入力チェックに異常が発生しないこと() {
     Student student = new Student();
     student.setId("1");
     student.setFullName("田中　太郎");
@@ -73,7 +73,7 @@ class StudentControllerTest {
 
     assertThat(violations.size()).isEqualTo(1);
     assertThat(violations).extracting("message")
-        .containsOnly("数字のみ入力するようにしてください。");
+        .containsOnly("数字のみ入力するようにしてください");
 
   }
 }
