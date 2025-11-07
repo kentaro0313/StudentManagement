@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,12 +72,14 @@ class StudentServiceTest {
 
     verify(repository, times(1)).searchStudent(id);
     verify(repository, times(1)).searchStudentCourse(student.getId());
+    Assertions.assertEquals(student, actual.getStudent());
+    Assertions.assertEquals(studentCourse, actual.getStudentCourseList());
 
   }
 
 
   @Test
-  void 受講生詳細の登録＿入力した値が適切にオブジェクトに入ること() {
+  void 受講生詳細の登録＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
     StudentCourse studentCourse = new StudentCourse();
     List<StudentCourse> studentCourseList = List.of(studentCourse);
@@ -85,15 +88,17 @@ class StudentServiceTest {
     doNothing().when(repository).registerStudent(student);
     doNothing().when(repository).registerStudentCourse(studentCourse);
 
-    sut.registerNewStudent(studentDetail);
+    StudentDetail actual = sut.registerNewStudent(studentDetail);
 
     verify(repository, times(1)).registerStudent(student);
     verify(repository, times(1)).registerStudentCourse(studentCourse);
+    Assertions.assertEquals(student, actual.getStudent());
+    Assertions.assertEquals(studentCourseList, actual.getStudentCourseList());
 
   }
 
   @Test
-  void 受講生詳細の更新＿入力した値で適切に更新が機能すること() {
+  void 受講生詳細の更新＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
     StudentCourse studentCourse = new StudentCourse();
     List<StudentCourse> studentCourseList = List.of(studentCourse);
@@ -106,6 +111,6 @@ class StudentServiceTest {
 
     verify(repository, times(1)).updateStudent(student);
     verify(repository, times(1)).updateStudentCourse(studentCourse);
-//
+
   }
 }
