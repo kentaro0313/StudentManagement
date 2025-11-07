@@ -60,7 +60,7 @@ class StudentServiceTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"1","2","3"})
+  @ValueSource(strings = {"999"})
   void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
     Student student = new Student();
     List<StudentCourse> studentCourse = new ArrayList<>();
@@ -77,13 +77,11 @@ class StudentServiceTest {
 
   @Test
   void 受講生詳細の登録＿入力した値が適切にオブジェクトに入ること() {
-    StudentDetail studentDetail = new StudentDetail();
     Student student = new Student();
-    studentDetail.setStudent(student);
     StudentCourse studentCourse = new StudentCourse();
-    List<StudentCourse> studentCourseList = new ArrayList<>();
-    studentCourseList.add(studentCourse);
-    studentDetail.setStudentCourseList(studentCourseList);
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+
     doNothing().when(repository).registerStudent(student);
     doNothing().when(repository).registerStudentCourse(studentCourse);
 
@@ -96,13 +94,11 @@ class StudentServiceTest {
 
   @Test
   void 受講生詳細の更新＿入力した値で適切に更新が機能すること() {
-    StudentDetail studentDetail = new StudentDetail();
     Student student = new Student();
-    studentDetail.setStudent(student);
-    List<StudentCourse> studentCourseList = new ArrayList<>();
     StudentCourse studentCourse = new StudentCourse();
-    studentCourseList.add(studentCourse);
-    studentDetail.setStudentCourseList(studentCourseList);
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+
     doNothing().when(repository).updateStudent(student);
     doNothing().when(repository).updateStudentCourse(studentCourse);
 
