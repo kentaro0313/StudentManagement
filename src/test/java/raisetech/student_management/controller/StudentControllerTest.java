@@ -2,13 +2,12 @@ package raisetech.student_management.controller;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -17,10 +16,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import raisetech.student_management.data.Student;
+import raisetech.student_management.data.StudentCourse;
 import raisetech.student_management.domain.StudentDetail;
 import raisetech.student_management.service.StudentService;
 
@@ -29,6 +30,9 @@ class StudentControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
+
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @MockitoBean
   private StudentService service;
@@ -41,6 +45,55 @@ class StudentControllerTest {
         .andExpect(status().isOk());
 
     verify(service, times(1)).searchStudentList();
+  }
+
+  @Test
+  void 受講生詳細の登録が実行できること() throws Exception {
+    Student student = new Student();
+    StudentCourse studentCourse = new StudentCourse();
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+    student.setId("1");
+    student.setFullName("田中　太郎");
+    student.setFurigana("タナカタロウ");
+    student.setHandleName("タロー");
+    student.setMailAddress("taro@example.com");
+    student.setArea("東京");
+    student.setAge(30);
+    student.setGender("男性");
+    studentCourse.setCourseName("国語");
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/registerStudent")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(studentDetail)))
+        .andExpect(status().isOk());
+
+    verify(service, times(1)).registerNewStudent(any(StudentDetail.class));
+
+  }
+
+  @Test
+  void 受講生の更新が実行できること() throws Exception{
+    Student student = new Student();
+    StudentCourse studentCourse = new StudentCourse();
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+    student.setId("1");
+    student.setFullName("田中　太郎");
+    student.setFurigana("タナカタロウ");
+    student.setHandleName("タロー");
+    student.setMailAddress("taro@example.com");
+    student.setArea("東京");
+    student.setAge(30);
+    student.setGender("男性");
+    studentCourse.setCourseName("国語");
+
+    mockMvc.perform(MockMvcRequestBuilders.put("/updateStudent")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(studentDetail)))
+        .andExpect(status().isOk());
+
+    verify(service, times(1)).updateStudent(any(StudentDetail.class));
   }
 
   @Test
@@ -76,4 +129,6 @@ class StudentControllerTest {
         .containsOnly("数字のみ入力するようにしてください");
 
   }
+
+
 }
