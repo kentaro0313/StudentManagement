@@ -1,23 +1,17 @@
 package raisetech.student_management.service;
 
-
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-
-
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import raisetech.student_management.controller.converter.StudentConverter;
@@ -45,7 +39,6 @@ class StudentServiceTest {
 
   @Test
   void 受講生詳細の一覧検索＿リポジトリとコンバーターの処理が適切に呼び出せていること() {
-
     List<Student> studentList = new ArrayList<>();
     List<StudentCourse> studentCourseList = new ArrayList<>();
     when(repository.search()).thenReturn(studentList);
@@ -59,46 +52,58 @@ class StudentServiceTest {
 
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = {"999"})
-  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
+  @Test
+  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
-    List<StudentCourse> studentCourse = new ArrayList<>();
-    when(repository.searchStudent(id)).thenReturn(student);
-    when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourse);
+    student.setId("999");
+    student.setFullName("田中　太郎");
+    StudentCourse studentCourse = new StudentCourse();
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+    when(repository.searchStudent(student.getId())).thenReturn(student);
+    when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourseList);
 
-    StudentDetail actual = sut.searchStudent(id);
+    StudentDetail actual = sut.searchStudent(student.getId());
 
-    verify(repository, times(1)).searchStudent(id);
+    verify(repository, times(1)).searchStudent(student.getId());
     verify(repository, times(1)).searchStudentCourse(student.getId());
-
+    Assertions.assertNotNull(actual.getStudent(), "NULLになってます");
+    Assertions.assertNotNull(actual.getStudentCourseList(), "NULLになってます");
+    assertThat(actual.getStudent().getId()).isEqualTo(studentDetail.getStudent().getId());
+    assertThat(actual.getStudent().getFullName()).isEqualTo(
+        studentDetail.getStudent().getFullName());
   }
 
 
   @Test
-  void 受講生詳細の登録＿入力した値が適切にオブジェクトに入ること() {
+  void 受講生詳細の登録＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
+    student.setId("999");
+    student.setFullName("田中　太郎");
     StudentCourse studentCourse = new StudentCourse();
     List<StudentCourse> studentCourseList = List.of(studentCourse);
     StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
-
     doNothing().when(repository).registerStudent(student);
     doNothing().when(repository).registerStudentCourse(studentCourse);
 
-    sut.registerNewStudent(studentDetail);
+    StudentDetail actual = sut.registerNewStudent(studentDetail);
 
     verify(repository, times(1)).registerStudent(student);
     verify(repository, times(1)).registerStudentCourse(studentCourse);
+    Assertions.assertNotNull(actual.getStudent(), "NULLになってます");
+    Assertions.assertNotNull(actual.getStudentCourseList(), "NULLになってます");
+    assertThat(actual.getStudent().getId()).isEqualTo(studentDetail.getStudent().getId());
+    assertThat(actual.getStudent().getFullName()).isEqualTo(
+        studentDetail.getStudent().getFullName());
 
   }
 
   @Test
-  void 受講生詳細の更新＿入力した値で適切に更新が機能すること() {
+  void 受講生詳細の更新＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
     StudentCourse studentCourse = new StudentCourse();
     List<StudentCourse> studentCourseList = List.of(studentCourse);
     StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
-
     doNothing().when(repository).updateStudent(student);
     doNothing().when(repository).updateStudentCourse(studentCourse);
 
@@ -106,6 +111,6 @@ class StudentServiceTest {
 
     verify(repository, times(1)).updateStudent(student);
     verify(repository, times(1)).updateStudentCourse(studentCourse);
-//
+
   }
 }
