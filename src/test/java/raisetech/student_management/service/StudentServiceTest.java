@@ -1,6 +1,7 @@
 package raisetech.student_management.service;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -11,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 
 
-import org.junit.jupiter.params.provider.CsvSource;
+
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -64,16 +66,20 @@ class StudentServiceTest {
   @ValueSource(strings = {"999"})
   void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
     Student student = new Student();
-    List<StudentCourse> studentCourse = new ArrayList<>();
+    StudentCourse studentCourse = new StudentCourse();
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
+
     when(repository.searchStudent(id)).thenReturn(student);
-    when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourse);
+    when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourseList);
 
     StudentDetail actual = sut.searchStudent(id);
 
     verify(repository, times(1)).searchStudent(id);
     verify(repository, times(1)).searchStudentCourse(student.getId());
-    Assertions.assertEquals(student, actual.getStudent());
-    Assertions.assertEquals(studentCourse, actual.getStudentCourseList());
+    Assertions.assertNotNull(student, "NULLになってます");
+    Assertions.assertNotNull(studentCourse, "NULLになってます");
+    assertThat(actual).usingRecursiveComparison().isEqualTo(studentDetail);
 
   }
 
@@ -92,8 +98,9 @@ class StudentServiceTest {
 
     verify(repository, times(1)).registerStudent(student);
     verify(repository, times(1)).registerStudentCourse(studentCourse);
-    Assertions.assertEquals(student, actual.getStudent());
-    Assertions.assertEquals(studentCourseList, actual.getStudentCourseList());
+    Assertions.assertNotNull(student, "NULLになってます");
+    Assertions.assertNotNull(studentCourse, "NULLになってます");
+    assertThat(actual).usingRecursiveComparison().isEqualTo(studentDetail);
 
   }
 
