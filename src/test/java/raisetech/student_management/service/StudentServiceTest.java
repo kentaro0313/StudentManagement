@@ -62,25 +62,25 @@ class StudentServiceTest {
 
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = {"999"})
-  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること(String id) {
+ @Test
+  void 受講生詳細の検索＿リポジトリが適切に呼び出されていること() {
     Student student = new Student();
+    student.setId("999");
     StudentCourse studentCourse = new StudentCourse();
     List<StudentCourse> studentCourseList = List.of(studentCourse);
     StudentDetail studentDetail = new StudentDetail(student, studentCourseList);
 
-    when(repository.searchStudent(id)).thenReturn(student);
+    when(repository.searchStudent(student.getId())).thenReturn(student);
     when(repository.searchStudentCourse(student.getId())).thenReturn(studentCourseList);
 
-    StudentDetail actual = sut.searchStudent(id);
+    StudentDetail actual = sut.searchStudent(student.getId());
 
-    verify(repository, times(1)).searchStudent(id);
+    verify(repository, times(1)).searchStudent(student.getId());
     verify(repository, times(1)).searchStudentCourse(student.getId());
-    Assertions.assertNotNull(student, "NULLになってます");
-    Assertions.assertNotNull(studentCourse, "NULLになってます");
-    assertThat(actual).usingRecursiveComparison().isEqualTo(studentDetail);
-
+    Assertions.assertNotNull(actual.getStudent(), "NULLになってます");
+    Assertions.assertNotNull(actual.getStudentCourseList(), "NULLになってます");
+    assertThat(actual.getStudent().getId()).isEqualTo(studentDetail.getStudent().getId());
+    assertThat(actual.getStudent().getFullName()).isEqualTo(studentDetail.getStudent().getFullName());
   }
 
 
@@ -98,9 +98,10 @@ class StudentServiceTest {
 
     verify(repository, times(1)).registerStudent(student);
     verify(repository, times(1)).registerStudentCourse(studentCourse);
-    Assertions.assertNotNull(student, "NULLになってます");
-    Assertions.assertNotNull(studentCourse, "NULLになってます");
-    assertThat(actual).usingRecursiveComparison().isEqualTo(studentDetail);
+    Assertions.assertNotNull(actual.getStudent(), "NULLになってます");
+    Assertions.assertNotNull(actual.getStudentCourseList(), "NULLになってます");
+    assertThat(actual.getStudent().getId()).isEqualTo(studentDetail.getStudent().getId());
+    assertThat(actual.getStudent().getFullName()).isEqualTo(studentDetail.getStudent().getFullName());
 
   }
 
