@@ -16,8 +16,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import raisetech.student_management.data.Student;
@@ -34,7 +37,7 @@ class StudentControllerTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-  @MockitoBean
+  @MockBean
   private StudentService service;
 
   private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
@@ -126,7 +129,7 @@ class StudentControllerTest {
 
     assertThat(violations.size()).isEqualTo(1);
     assertThat(violations).extracting("message")
-        .containsOnly("数字のみ入力するようにしてください");
+        .containsOnly("数字のみ入力するようにしてください。");
 
   }
 
