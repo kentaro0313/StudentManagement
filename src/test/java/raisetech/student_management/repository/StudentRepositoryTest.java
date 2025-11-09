@@ -20,7 +20,7 @@ class StudentRepositoryTest {
   private StudentRepository sut;
 
   @Test
-  void 受講生の全件検索が行えること(){
+  void 受講生の全件検索が行えること() {
 
     List<Student> actual = sut.search();
 
@@ -28,7 +28,7 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void 受講生の検索が行えること(){
+  void 受講生の検索が行えること() {
     Student student = new Student();
     student.setId("1");
     student.setFullName("田中太郎");
@@ -52,7 +52,7 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void 受講生のコース情報の全件検索が行えること(){
+  void 受講生のコース情報の全件検索が行えること() {
 
     List<StudentCourse> actual = sut.searchStudentCourseList();
 
@@ -60,12 +60,14 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void 受講生IDに紐づく受講生コース情報の検索が行えること(){
+  void 受講生IDに紐づく受講生コース情報の検索が行えること() {
     StudentCourse studentCourse = new StudentCourse();
     studentCourse.setCourseId("1");
     studentCourse.setStudentId("1");
     studentCourse.setCourseName("Javaコース");
-    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    LocalDateTime localDateTime = LocalDateTime.of(
+        LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+        LocalTime.of(0, 0, 0));
     studentCourse.setStartDate(localDateTime);
     studentCourse.setCompleteDate(localDateTime.plusYears(1));
     List<StudentCourse> studentCourseList = List.of(studentCourse);
@@ -77,12 +79,13 @@ class StudentRepositoryTest {
     assertThat(actual.get(0).getStudentId()).isEqualTo(studentCourseList.get(0).getStudentId());
     assertThat(actual.get(0).getCourseName()).isEqualTo(studentCourseList.get(0).getCourseName());
     assertThat(actual.get(0).getStartDate()).isEqualTo(studentCourseList.get(0).getStartDate());
-    assertThat(actual.get(0).getCompleteDate()).isEqualTo(studentCourseList.get(0).getCompleteDate());
+    assertThat(actual.get(0).getCompleteDate()).isEqualTo(
+        studentCourseList.get(0).getCompleteDate());
 
   }
 
   @Test
-  void 受講生の登録が行えること(){
+  void 受講生の登録が行えること() {
     Student student = new Student();
     student.setFullName("廣瀬　健太朗");
     student.setFurigana("ヒロセケンタロウ");
@@ -99,22 +102,25 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void 受講生のコース情報の登録が行えること(){
-    StudentCourse studentCourse = new StudentCourse();;
+  void 受講生のコース情報の登録が行えること() {
+    StudentCourse studentCourse = new StudentCourse();
+    ;
     studentCourse.setStudentId("1");
     studentCourse.setCourseName("Javaコース");
-    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2025/11/09", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    LocalDateTime localDateTime = LocalDateTime.of(
+        LocalDate.parse("2025/11/09", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+        LocalTime.of(0, 0, 0));
     studentCourse.setStartDate(localDateTime);
     studentCourse.setCompleteDate(localDateTime.plusYears(1));
 
     sut.registerStudentCourse(studentCourse);
-    List<StudentCourse> actual =sut.searchStudentCourseList();
+    List<StudentCourse> actual = sut.searchStudentCourseList();
 
     assertThat(actual.size()).isEqualTo(11);
   }
 
   @Test
-  void 受講生の更新が行えること(){
+  void 受講生の更新が行えること() {
     Student student = new Student();
     student.setId("1");
     student.setFullName("田中太郎");
@@ -124,7 +130,7 @@ class StudentRepositoryTest {
     student.setArea("東京");
     student.setAge(30);
     student.setGender("男性");
-    String id ="1";
+    String id = "1";
 
     sut.updateStudent(student);
     Student actual = sut.searchStudent(id);
@@ -133,12 +139,14 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void 受講生のコース情報の更新が行えること(){
+  void 受講生のコース情報の更新が行えること() {
     StudentCourse studentCourse = new StudentCourse();
     studentCourse.setCourseId("1");
     studentCourse.setStudentId("1");
     studentCourse.setCourseName("AWSコース");
-    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    LocalDateTime localDateTime = LocalDateTime.of(
+        LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+        LocalTime.of(0, 0, 0));
     studentCourse.setStartDate(localDateTime);
     studentCourse.setCompleteDate(localDateTime.plusYears(1));
     String courseId = "1";
