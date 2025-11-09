@@ -124,16 +124,28 @@ class StudentRepositoryTest {
     student.setArea("東京");
     student.setAge(30);
     student.setGender("男性");
+    String id ="1";
 
     sut.updateStudent(student);
-    List<Student> actual = sut.search();
+    Student actual = sut.searchStudent(id);
 
-    assertThat(actual.get(0).getFurigana()).isEqualTo(student.getFurigana());
-    assertThat(actual.size()).isEqualTo(5);
+    assertThat(actual.getFurigana()).isEqualTo(student.getFurigana());
   }
 
   @Test
   void 受講生のコース情報の更新が行えること(){
+    StudentCourse studentCourse = new StudentCourse();
+    studentCourse.setCourseId("1");
+    studentCourse.setStudentId("1");
+    studentCourse.setCourseName("AWSコース");
+    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    studentCourse.setStartDate(localDateTime);
+    studentCourse.setCompleteDate(localDateTime.plusYears(1));
+    String courseId = "1";
 
+    sut.updateStudentCourse(studentCourse);
+    List<StudentCourse> actual = sut.searchStudentCourse(courseId);
+
+    assertThat(actual.get(0).getCourseName()).isEqualTo(studentCourse.getCourseName());
   }
 }
