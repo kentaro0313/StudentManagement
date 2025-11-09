@@ -47,9 +47,16 @@ dependencies {
     //MyBatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
+    //APサーバー（Tomcat）
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //SpringBoot Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    //MyBatis Test
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+    //H2(InMemoryDB)
+    testImplementation 'com.h2database:h2:2.4.240'
 }
 
 tasks.named('test') {
