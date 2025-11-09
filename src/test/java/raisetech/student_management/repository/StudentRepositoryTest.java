@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import raisetech.student_management.data.Student;
+import raisetech.student_management.data.StudentCourse;
 
 @MybatisTest
 class StudentRepositoryTest {
@@ -49,6 +50,9 @@ class StudentRepositoryTest {
   @Test
   void 受講生のコース情報の全件検索が行えること(){
 
+    List<StudentCourse> actual = sut.searchStudentCourseList();
+
+    assertThat(actual.size()).isEqualTo(10);
   }
 
   @Test
