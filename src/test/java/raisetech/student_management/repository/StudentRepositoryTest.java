@@ -100,7 +100,17 @@ class StudentRepositoryTest {
 
   @Test
   void 受講生のコース情報の登録が行えること(){
+    StudentCourse studentCourse = new StudentCourse();;
+    studentCourse.setStudentId("1");
+    studentCourse.setCourseName("Javaコース");
+    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2025/11/09", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    studentCourse.setStartDate(localDateTime);
+    studentCourse.setCompleteDate(localDateTime.plusYears(1));
 
+    sut.registerStudentCourse(studentCourse);
+    List<StudentCourse> actual =sut.searchStudentCourseList();
+
+    assertThat(actual.size()).isEqualTo(11);
   }
 
   @Test
