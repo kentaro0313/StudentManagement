@@ -2,6 +2,10 @@ package raisetech.student_management.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -57,6 +61,23 @@ class StudentRepositoryTest {
 
   @Test
   void 受講生IDに紐づく受講生コース情報の検索が行えること(){
+    StudentCourse studentCourse = new StudentCourse();
+    studentCourse.setCourseId("1");
+    studentCourse.setStudentId("1");
+    studentCourse.setCourseName("Javaコース");
+    LocalDateTime localDateTime = LocalDateTime.of(LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")), LocalTime.of(0,0,0));
+    studentCourse.setStartDate(localDateTime);
+    studentCourse.setCompleteDate(localDateTime.plusYears(1));
+    List<StudentCourse> studentCourseList = List.of(studentCourse);
+    String student_id = "1";
+
+    List<StudentCourse> actual = sut.searchStudentCourse(student_id);
+
+    assertThat(actual.get(0).getCourseId()).isEqualTo(studentCourseList.get(0).getCourseId());
+    assertThat(actual.get(0).getStudentId()).isEqualTo(studentCourseList.get(0).getStudentId());
+    assertThat(actual.get(0).getCourseName()).isEqualTo(studentCourseList.get(0).getCourseName());
+    assertThat(actual.get(0).getStartDate()).isEqualTo(studentCourseList.get(0).getStartDate());
+    assertThat(actual.get(0).getCompleteDate()).isEqualTo(studentCourseList.get(0).getCompleteDate());
 
   }
 
