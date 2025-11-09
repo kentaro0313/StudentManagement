@@ -115,7 +115,21 @@ class StudentRepositoryTest {
 
   @Test
   void 受講生の更新が行えること(){
+    Student student = new Student();
+    student.setId("1");
+    student.setFullName("田中太郎");
+    student.setFurigana("タロウタナカ");
+    student.setHandleName("タロウ");
+    student.setMailAddress("taro@example.com");
+    student.setArea("東京");
+    student.setAge(30);
+    student.setGender("男性");
 
+    sut.updateStudent(student);
+    List<Student> actual = sut.search();
+
+    assertThat(actual.get(0).getFurigana()).isEqualTo(student.getFurigana());
+    assertThat(actual.size()).isEqualTo(5);
   }
 
   @Test
