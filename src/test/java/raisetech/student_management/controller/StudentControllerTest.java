@@ -61,7 +61,7 @@ class StudentControllerTest {
     student.setArea("東京");
     student.setAge(30);
     student.setGender("男性");
-    studentCourse.setCourseName("国語");
+    studentCourse.setCourseName("英語コース");
 
     mockMvc.perform(MockMvcRequestBuilders.post("/registerStudent")
         .contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +86,7 @@ class StudentControllerTest {
     student.setArea("東京");
     student.setAge(30);
     student.setGender("男性");
-    studentCourse.setCourseName("国語");
+    studentCourse.setCourseName("英語コース");
 
     mockMvc.perform(MockMvcRequestBuilders.put("/updateStudent")
             .contentType(MediaType.APPLICATION_JSON)

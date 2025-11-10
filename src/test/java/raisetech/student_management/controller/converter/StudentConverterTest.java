@@ -55,7 +55,7 @@ class StudentConverterTest {
 
   private void studentCourseInfo(StudentCourse studentCourse) {
     studentCourse.setStudentId("1");
-    studentCourse.setCourseName("Javaコース");
+    studentCourse.setCourseName("英語コース");
     studentCourse.setStartDate(LocalDateTime.now());
     studentCourse.setCompleteDate(LocalDateTime.now().plusYears(1));
   }

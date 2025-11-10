@@ -64,7 +64,7 @@ class StudentRepositoryTest {
     StudentCourse studentCourse = new StudentCourse();
     studentCourse.setCourseId("1");
     studentCourse.setStudentId("1");
-    studentCourse.setCourseName("Javaコース");
+    studentCourse.setCourseName("英語コース");
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
@@ -105,7 +105,7 @@ class StudentRepositoryTest {
   void 受講生のコース情報の登録が行えること() {
     StudentCourse studentCourse = new StudentCourse();
     studentCourse.setStudentId("1");
-    studentCourse.setCourseName("Javaコース");
+    studentCourse.setCourseName("英語コース");
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2025/11/09", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
@@ -142,7 +142,7 @@ class StudentRepositoryTest {
     StudentCourse studentCourse = new StudentCourse();
     studentCourse.setCourseId("1");
     studentCourse.setStudentId("1");
-    studentCourse.setCourseName("AWSコース");
+    studentCourse.setCourseName("ドイツ語コース");
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
