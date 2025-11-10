@@ -104,7 +104,6 @@ class StudentRepositoryTest {
   @Test
   void 受講生のコース情報の登録が行えること() {
     StudentCourse studentCourse = new StudentCourse();
-    ;
     studentCourse.setStudentId("1");
     studentCourse.setCourseName("Javaコース");
     LocalDateTime localDateTime = LocalDateTime.of(
