@@ -84,7 +84,7 @@ public class StudentController {
           schema = @Schema(implementation =  StudentDetail.class),
           examples = @ExampleObject(
               name = "受講生の例",
-              value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"国語\"}"
+              value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"英語コース\"}"
           )
       )
   ))
@@ -112,7 +112,7 @@ public class StudentController {
               schema = @Schema(implementation =  StudentDetail.class),
               examples = @ExampleObject(
                   name = "受講生の例",
-                  value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"国語\"}"
+                  value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"英語コース\"}"
               )
           )
       ))

@@ -80,8 +80,8 @@ public class StudentService {
     studentCourse.setStudentId(student.getId());
 
     LocalDateTime now = LocalDateTime.now();
-    studentCourse.setStartDate(now);
-    studentCourse.setCompleteDate(now.plusYears(1));
+    studentCourse.setStartDateAt(now);
+    studentCourse.setCompleteDateAt(now.plusYears(1));
   }
 
   /**

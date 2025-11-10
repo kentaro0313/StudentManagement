@@ -68,8 +68,8 @@ class StudentRepositoryTest {
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
-    studentCourse.setStartDate(localDateTime);
-    studentCourse.setCompleteDate(localDateTime.plusYears(1));
+    studentCourse.setStartDateAt(localDateTime);
+    studentCourse.setCompleteDateAt(localDateTime.plusYears(1));
     List<StudentCourse> studentCourseList = List.of(studentCourse);
     String student_id = "1";
 
@@ -78,9 +78,9 @@ class StudentRepositoryTest {
     assertThat(actual.get(0).getCourseId()).isEqualTo(studentCourseList.get(0).getCourseId());
     assertThat(actual.get(0).getStudentId()).isEqualTo(studentCourseList.get(0).getStudentId());
     assertThat(actual.get(0).getCourseName()).isEqualTo(studentCourseList.get(0).getCourseName());
-    assertThat(actual.get(0).getStartDate()).isEqualTo(studentCourseList.get(0).getStartDate());
-    assertThat(actual.get(0).getCompleteDate()).isEqualTo(
-        studentCourseList.get(0).getCompleteDate());
+    assertThat(actual.get(0).getStartDateAt()).isEqualTo(studentCourseList.get(0).getStartDateAt());
+    assertThat(actual.get(0).getCompleteDateAt()).isEqualTo(
+        studentCourseList.get(0).getCompleteDateAt());
 
   }
 
@@ -109,8 +109,8 @@ class StudentRepositoryTest {
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2025/11/09", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
-    studentCourse.setStartDate(localDateTime);
-    studentCourse.setCompleteDate(localDateTime.plusYears(1));
+    studentCourse.setStartDateAt(localDateTime);
+    studentCourse.setCompleteDateAt(localDateTime.plusYears(1));
 
     sut.registerStudentCourse(studentCourse);
     List<StudentCourse> actual = sut.searchStudentCourseList();
@@ -146,8 +146,8 @@ class StudentRepositoryTest {
     LocalDateTime localDateTime = LocalDateTime.of(
         LocalDate.parse("2023/03/12", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
         LocalTime.of(0, 0, 0));
-    studentCourse.setStartDate(localDateTime);
-    studentCourse.setCompleteDate(localDateTime.plusYears(1));
+    studentCourse.setStartDateAt(localDateTime);
+    studentCourse.setCompleteDateAt(localDateTime.plusYears(1));
     String courseId = "1";
 
     sut.updateStudentCourse(studentCourse);

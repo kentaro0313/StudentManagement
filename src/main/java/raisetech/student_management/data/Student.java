@@ -23,6 +23,7 @@ public class Student {
   @NotBlank
   private String furigana;
 
+  @NotBlank
   private String handleName;
 
   @Email
@@ -31,7 +32,9 @@ public class Student {
   @NotBlank
   private String area;
 
+
   private int age;
+
   private String gender;
   private String remark;
   private boolean isDeleted;

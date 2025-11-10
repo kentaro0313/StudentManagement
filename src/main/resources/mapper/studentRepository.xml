@@ -29,8 +29,8 @@
 
 <!-- 受講生のコース情報の登録-->
   <insert id="registerStudentCourse" useGeneratedKeys = "true" keyProperty = "courseId">
-    INSERT INTO students_courses (student_id, course_name , start_date, complete_date)
-    values(#{studentId}, #{courseName}, #{startDate}, #{completeDate})
+    INSERT INTO students_courses (student_id, course_name , start_date_at, complete_date_at)
+    values(#{studentId}, #{courseName}, #{startDateAt}, #{completeDateAt})
   </insert>
 
 <!-- 受講生の更新-->

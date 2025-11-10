@@ -17,7 +17,7 @@ public class StudentCourse {
 
   @NotBlank
   private String courseName;
-  private LocalDateTime startDate;
-  private LocalDateTime completeDate;
+  private LocalDateTime startDateAt;
+  private LocalDateTime completeDateAt;
 
 }
