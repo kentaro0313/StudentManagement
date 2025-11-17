@@ -15,7 +15,7 @@ public class StudentCourse {
   private String courseId;
   private String studentId;
 
-  @NotBlank
+  @NotBlank(message = "コース名を入力してください")
   private String courseName;
   private LocalDateTime startDateAt;
   private LocalDateTime completeDateAt;

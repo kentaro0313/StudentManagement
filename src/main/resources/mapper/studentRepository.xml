@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="raisetech.student_management.repository.StudentRepository">
   <!-- 受講生の全件検索-->
   <select id="search" resultType="raisetech.student_management.data.Student">
@@ -21,29 +22,59 @@
     SELECT * FROM students_courses WHERE student_id = #{studentId}
   </select>
 
+  <!-- 申し込み状況の全件検索-->
+  <select id="searchStudentCourseStatusList"
+    resultType="raisetech.student_management.data.StudentCourseStatus">
+    SELECT * FROM students_courses_status;
+  </select>
+
+  <!-- 申し込み状況の検索 -->
+  <select id="searchStudentCourseStatus"
+    resultType="raisetech.student_management.data.StudentCourseStatus">
+    SELECT * FROM students_courses_status WHERE course_id = #{courseId};
+  </select>
+
   <!-- 受講生の登録-->
-  <insert id="registerStudent" useGeneratedKeys = "true" keyProperty = "id">
-    INSERT INTO students (full_name, furigana, handle_name, mail_address, area, age, gender, remark, is_deleted)
-    values (#{fullName},#{furigana}, #{handleName}, #{mailAddress}, #{area}, #{age}, #{gender}, #{remark}, #{isDeleted})
+  <insert id="registerStudent" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO students (full_name, furigana, handle_name, mail_address, area, age, gender, remark,
+    is_deleted)
+    VALUES (#{fullName},#{furigana}, #{handleName}, #{mailAddress}, #{area}, #{age}, #{gender},
+    #{remark}, #{isDeleted})
   </insert>
 
-<!-- 受講生のコース情報の登録-->
-  <insert id="registerStudentCourse" useGeneratedKeys = "true" keyProperty = "courseId">
+  <!-- 受講生のコース情報の登録-->
+  <insert id="registerStudentCourse" useGeneratedKeys="true" keyProperty="courseId">
     INSERT INTO students_courses (student_id, course_name , start_date_at, complete_date_at)
-    values(#{studentId}, #{courseName}, #{startDateAt}, #{completeDateAt})
+    VALUES (#{studentId}, #{courseName}, #{startDateAt}, #{completeDateAt})
   </insert>
 
-<!-- 受講生の更新-->
-  <update id="updateStudent" useGeneratedKeys = "true" keyProperty = "id">
+  <!-- 受講コースのコース申し込み状況の登録 -->
+  <insert id="registerStudentCourseStatus" useGeneratedKeys="true" keyProperty="statusId">
+    INSERT INTO students_courses_status(course_id, course_status)
+    VALUES (#{courseId}, #{courseStatus})
+  </insert>
+
+  <!-- 受講生の更新-->
+  <update id="updateStudent" useGeneratedKeys="true" keyProperty="id">
     UPDATE students
-    SET full_name = #{fullName}, furigana = #{furigana}, handle_name = #{handleName}, mail_address = #{mailAddress}, area = #{area}, age = #{age}, gender = #{gender}, remark =  #{remark}, is_deleted = #{isDeleted}
+    SET full_name = #{fullName}, furigana = #{furigana}, handle_name = #{handleName}, mail_address =
+    #{mailAddress}, area = #{area}, age = #{age}, gender = #{gender}, remark = #{remark}, is_deleted
+    = #{isDeleted}
     WHERE id = #{id}
   </update>
 
-<!-- 受講生のコース情報の更新-->
-  <update id="updateStudentCourse" useGeneratedKeys = "true" keyProperty = "courseId">
+  <!-- 受講生のコース情報の更新-->
+  <update id="updateStudentCourse" useGeneratedKeys="true" keyProperty="courseId">
     UPDATE students_courses
     SET course_name = #{courseName}
+    WHERE course_id = #{courseId}
+  </update>
+
+
+  <!-- 受講コースのコース申し込み状況の更新 -->
+  <update id="updateStudentCourseStatus" useGeneratedKeys="true" keyProperty="statusId">
+    UPDATE students_courses_status
+    SET course_status = #{courseStatus}
     WHERE course_id = #{courseId}
   </update>
 
