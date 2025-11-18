@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.student_management.data.Student;
 import raisetech.student_management.domain.StudentDetail;
 import raisetech.student_management.exception.TestException;
 import raisetech.student_management.service.StudentService;
@@ -40,14 +40,31 @@ public class StudentController {
   }
 
   /**
-   * 受講生詳細の一覧検索です。 全件検索、条件を指定することによって条件検索が可能です。
+   * 受講生詳細の一覧検索です。 全件検索や条件を指定することによって条件検索が可能です。
    *
    * @return　受講生詳細一覧
    */
   @Operation(summary = "一覧検索", description = "受講生詳細の一覧を検索します")
   @GetMapping("/studentList")
-  public List<StudentDetail> getStudentList(@RequestBody Student student) {
-    return service.searchStudentList(student);
+  public List<StudentDetail> getStudentList(
+      @RequestParam(required = false)
+      String id,
+      @RequestParam(required = false)
+      String fullName,
+      @RequestParam(required = false)
+      String furigana,
+      @RequestParam(required = false)
+      String handleName,
+      @RequestParam(required = false)
+      String mailAddress,
+      @RequestParam(required = false)
+      String area,
+      @RequestParam(required = false)
+      Integer age,
+      @RequestParam(required = false)
+      String gender
+  ) {
+    return service.searchStudentList(id, fullName, furigana, handleName, mailAddress, area, age, gender);
   }
 
   /**

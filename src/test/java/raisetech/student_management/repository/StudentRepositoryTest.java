@@ -22,9 +22,8 @@ class StudentRepositoryTest {
 
   @Test
   void 受講生の全件検索が行えること() {
-
-    List<Student> actual = sut.search();
-
+    Student student = new Student();
+    List<Student> actual = sut.search(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
     assertThat(actual.size()).isEqualTo(5);
   }
 
@@ -115,9 +114,10 @@ class StudentRepositoryTest {
     student.setArea("兵庫");
     student.setAge(29);
     student.setGender("男性");
+    Student student1 = new Student();
 
     sut.registerStudent(student);
-    List<Student> actual = sut.search();
+    List<Student> actual = sut.search(student1.getId(), student1.getFullName(), student1.getFurigana(), student1.getHandleName(), student1.getMailAddress(), student1.getArea(), student1.getAge(), student1.getGender());
 
     assertThat(actual.size()).isEqualTo(6);
   }

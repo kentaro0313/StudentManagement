@@ -5,6 +5,15 @@
   <!-- 受講生の全件検索-->
   <select id="search" resultType="raisetech.student_management.data.Student">
     SELECT * FROM students
+    WHERE 1 = 1
+    AND (id = #{id} OR #{id} IS NULL)
+    AND (full_name = #{fullName} OR #{fullName} IS NULL)
+    AND (furigana = #{furigana} OR #{furigana} IS NULL)
+    AND (handle_name = #{handleName} OR #{handleName} IS NULL)
+    AND (mail_address = #{mailAddress} OR #{mailAddress} IS NULL)
+    AND (area = #{area} OR #{area} IS NULL)
+    AND (age = #{age} OR #{age} IS NULL)
+    AND (gender = #{gender} OR #{gender} IS NULL);
   </select>
 
   <!-- 受講生の検索-->
@@ -25,7 +34,7 @@
   <!-- 申し込み状況の全件検索-->
   <select id="searchStudentCourseStatusList"
     resultType="raisetech.student_management.data.StudentCourseStatus">
-    SELECT * FROM students_courses_status;
+    SELECT * FROM students_courses_status
   </select>
 
   <!-- 申し込み状況の検索 -->

@@ -47,7 +47,7 @@ class StudentControllerTest {
             .content(objectMapper.writeValueAsString(student)))
         .andExpect(status().isOk());
 
-    verify(service, times(1)).searchStudentList(any(Student.class));
+    verify(service, times(1)).searchStudentList(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
   }
 
   @Test
