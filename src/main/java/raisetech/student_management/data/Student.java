@@ -19,6 +19,7 @@ public class Student {
   private String id;
 
   @NotBlank(message = "名前を入力してください")
+  @Pattern(regexp = "^[\\\\u4E00-\\\\u9FFF\\\\u3040-\\\\u309F\\\\u30A0-\\\\u30FF]+$", message = "スペースを空けず詰めて入力してください")
   private String fullName;
 
   @NotBlank
@@ -32,7 +33,7 @@ public class Student {
   @NotBlank
   private String mailAddress;
 
-  @NotBlank
+  @NotBlank(message = "住んでいる地域を入力してください（例：東京、大阪）")
   private String area;
 
   @NotNull

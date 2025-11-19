@@ -15,9 +15,9 @@ import raisetech.student_management.data.StudentCourseStatus;
 public interface StudentRepository {
 
   /**
-   * 受講生の全件検索を行います。
+   * 受講生の全件検索または条件検索を行います。
    *
-   * @return　受講生一覧（全件）
+   * @return　受講生一覧（全件OR条件）
    */
   List<Student> search(Student student);
 
