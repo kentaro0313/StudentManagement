@@ -84,7 +84,7 @@ public class StudentController {
    * @return　受講生
    */
   @Operation(summary = "受講生検索", description = "受講生を検索します")
-  @GetMapping("/student/{id:^\\d+$}")
+  @GetMapping("/student/{id}")
   public StudentDetail getStudent(
       @Parameter(description = "検索したい受講生のID", example = "123")
       @PathVariable @Size(min = 1, max = 3)

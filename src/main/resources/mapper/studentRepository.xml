@@ -40,7 +40,7 @@
   <!-- 申し込み状況の検索 -->
   <select id="searchStudentCourseStatus"
     resultType="raisetech.student_management.data.StudentCourseStatus">
-    SELECT * FROM students_courses_status WHERE course_id = #{courseId};
+    SELECT * FROM students_courses_status WHERE course_id = #{courseId}
   </select>
 
   <!-- 受講生の登録-->
