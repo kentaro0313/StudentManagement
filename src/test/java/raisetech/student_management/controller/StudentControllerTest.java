@@ -106,7 +106,7 @@ class StudentControllerTest {
                         {
                           "student": {
                               "id": "999",
-                              "fullName": "山田　太郎",
+                              "fullName": "山田太郎",
                               "furigana": "ヤマダタロウ",
                               "handleName": "タロウ",
                               "mailAddress": "taro@exaple.com",
@@ -153,7 +153,7 @@ class StudentControllerTest {
   void 受講生詳細の受講生で適切な値を入力した時に入力チェックに異常が発生しないこと() {
     Student student = new Student();
     student.setId("1");
-    student.setFullName("田中　太郎");
+    student.setFullName("田中太郎");
     student.setFurigana("タナカタロウ");
     student.setHandleName("タロー");
     student.setMailAddress("taro@example.com");
@@ -170,7 +170,7 @@ class StudentControllerTest {
   void 受講生詳細の受講生でIDに数字以外を用いた時に入力チェックに掛かること() {
     Student student = new Student();
     student.setId("テストです。");
-    student.setFullName("田中　太郎");
+    student.setFullName("田中太郎");
     student.setFurigana("タナカタロウ");
     student.setHandleName("タロー");
     student.setMailAddress("taro@example.com");
@@ -200,17 +200,17 @@ class StudentControllerTest {
 
     Set<ConstraintViolation<Student>> violations = validator.validate(student);
 
-    assertThat(violations.size()).isEqualTo(1);
+    assertThat(violations.size()).isEqualTo(2);
     assertThat(violations).extracting("message")
-        .containsOnly("名前を入力してください");
+        .containsOnly("名前を入力してください", "スペースを空けず詰めて入力してください");
   }
 
   @Test
   void 受講生詳細の受講生でフリガナにカタカナ以外を用いた時に入力チェックに掛かること() {
     Student student = new Student();
     student.setId("1");
-    student.setFullName("田中　太郎");
-    student.setFurigana("田中　太郎");
+    student.setFullName("田中太郎");
+    student.setFurigana("田中太郎");
     student.setHandleName("タロー");
     student.setMailAddress("taro@example.com");
     student.setArea("東京");
@@ -229,7 +229,7 @@ class StudentControllerTest {
   void 受講生詳細の受講生で不正なメールアドレスを用いた時に入力チェックに掛かること() {
     Student student = new Student();
     student.setId("1");
-    student.setFullName("田中　太郎");
+    student.setFullName("田中太郎");
     student.setFurigana("タナカタロウ");
     student.setHandleName("タロー");
     student.setMailAddress("@example.com");
@@ -249,7 +249,7 @@ class StudentControllerTest {
   void 受講生詳細の受講生で年齢に数字以外を用いた時に入力チェックに掛かること() {
     Student student = new Student();
     student.setId("1");
-    student.setFullName("田中　太郎");
+    student.setFullName("田中太郎");
     student.setFurigana("タナカタロウ");
     student.setHandleName("タロー");
     student.setMailAddress("taro@example.com");

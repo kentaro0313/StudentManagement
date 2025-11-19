@@ -45,7 +45,7 @@ public class StudentController {
    *
    * @return　受講生詳細一覧
    */
-  @Operation(summary = "一覧検索", description = "受講生詳細の一覧を検索します")
+  @Operation(summary = "受講生詳細の一覧検索", description = "受講生詳細の一覧を検索します。条件をクエリパラメータに入力すると絞り込み検索が可能です")
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentList(
       @RequestParam(required = false)
@@ -106,8 +106,26 @@ public class StudentController {
           content = @Content(
               schema = @Schema(implementation = StudentDetail.class),
               examples = @ExampleObject(
-                  name = "受講生の例",
-                  value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"英語コース\"}"
+                  name = "受講生の登録例",
+                  value = "{\n"
+                      + "    \"student\": {\n"
+                      + "        \"fullName\":\"山田　太郎\", \n"
+                      + "        \"furigana\": \"タナカタロウ\",\n"
+                      + "        \"handleName\" : \"タロウ\",\n"
+                      + "        \"mailAddress\" : \"taro@example.com\",\n"
+                      + "        \"area\" : \"東京\",\n"
+                      + "        \"age\" : \"35\",\n"
+                      + "        \"gender\" : \"男性\"\n"
+                      + "    },\n"
+                      + " \"studentCourseSetList\": [\n"
+                      + "        {\n"
+                      + "            \"studentCourse\": {\n"
+                      + "                \"courseName\": \"英語語コース\"\n"
+                      + "            },\n"
+                      + "            \"studentCourseStatusMap\": {}\n"
+                      + "        }\n"
+                      + "    ]\n"
+                      + "}"
               )
           )
       ))
@@ -134,8 +152,40 @@ public class StudentController {
           content = @Content(
               schema = @Schema(implementation = StudentDetail.class),
               examples = @ExampleObject(
-                  name = "受講生の例",
-                  value = "{\"fullName\": \"山田　太郎\",\"furigana\": \"ヤマダタロウ\",\"handleName\": \"タロウ\",\"mailAddress\": \"taro@example.com\",\"area\": \"東京\",\"age\": \"30\",\"gender\": \"男\",\"courseName\": \"英語コース\"}"
+                  name = "受講生の更新例",
+                  value = "  {\n"
+                      + "        \"student\": {\n"
+                      + "            \"id\": \"999\",\n"
+                      + "            \"fullName\": \"田中太郎\",\n"
+                      + "            \"furigana\": \"タナカタロウ\",\n"
+                      + "            \"handleName\": \"タロウ\",\n"
+                      + "            \"mailAddress\": \"taro@example.com\",\n"
+                      + "            \"area\": \"東京\",\n"
+                      + "            \"age\": 35,\n"
+                      + "            \"gender\": \"男性\",\n"
+                      + "            \"remark\": null,\n"
+                      + "            \"deleted\": false\n"
+                      + "        },\n"
+                      + "        \"studentCourseSetList\": [\n"
+                      + "            {\n"
+                      + "                \"studentCourse\": {\n"
+                      + "                    \"courseId\": \"999\",\n"
+                      + "                    \"studentId\": \"999\",\n"
+                      + "                    \"courseName\": \"英語語コース\",\n"
+                      + "                    \"startDateAt\": \"2025-11-17T21:56:39\",\n"
+                      + "                    \"completeDateAt\": \"2026-11-17T21:56:39\"\n"
+                      + "                },\n"
+                      + "                \"studentCourseStatusMap\": {\n"
+                      + "                    \"28\": {\n"
+                      + "                        \"statusId\": \"999\",\n"
+                      + "                        \"courseId\": \"999\",\n"
+                      + "                        \"courseStatus\": \"本申し込み\"\n"
+                      + "                    }\n"
+                      + "                }\n"
+                      + "            }\n"
+                      + "        ]\n"
+                      + "    }"
+
               )
           )
       ))
@@ -156,6 +206,7 @@ public class StudentController {
    *
    * @return　メッセージ
    */
+  @Operation(summary = "例外処理", description = "例外処理を行います")
   @ApiResponse(responseCode = "400", description = "現在このAPIは利用出来ません。別のAPIを試してください。")
   @GetMapping("/getErrorMessage")
   public String getErrorMessage() throws TestException {

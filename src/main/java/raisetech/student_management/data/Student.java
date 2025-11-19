@@ -19,7 +19,7 @@ public class Student {
   private String id;
 
   @NotBlank(message = "名前を入力してください")
-  @Pattern(regexp = "^[\\\\u4E00-\\\\u9FFF\\\\u3040-\\\\u309F\\\\u30A0-\\\\u30FF]+$", message = "スペースを空けず詰めて入力してください")
+  @Pattern(regexp = "^[^\\s]+$", message = "スペースを空けず詰めて入力してください")
   private String fullName;
 
   @NotBlank
