@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import raisetech.student_management.data.Student;
 import raisetech.student_management.domain.StudentDetail;
 import raisetech.student_management.exception.TestException;
 import raisetech.student_management.service.StudentService;
@@ -64,7 +65,16 @@ public class StudentController {
       @RequestParam(required = false)
       String gender
   ) {
-    return service.searchStudentList(id, fullName, furigana, handleName, mailAddress, area, age, gender);
+    Student student= new Student();
+    student.setId(id);
+    student.setFullName(fullName);
+    student.setFurigana(furigana);
+    student.setHandleName(handleName);
+    student.setMailAddress(mailAddress);
+    student.setArea(area);
+    student.setAge(age);
+    student.setGender(gender);
+    return service.searchStudentList(student);
   }
 
   /**

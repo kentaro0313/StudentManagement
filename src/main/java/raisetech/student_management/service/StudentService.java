@@ -35,8 +35,8 @@ public class StudentService {
    *
    * @return　受講生一覧（条件検索）
    */
-  public List<StudentDetail> searchStudentList(String id, String fullName, String furigana, String handleName, String mailAddress, String area, Integer age, String gender) {
-    List<Student> studentList = repository.search(id, fullName, furigana, handleName, mailAddress, area, age, gender);
+  public List<StudentDetail> searchStudentList(Student student) {
+    List<Student> studentList = repository.search(student);
     List<StudentCourse> studentCourseList = repository.searchStudentCourseList();
     List<StudentCourseStatus> studentCourseStatusList = repository.searchStudentCourseStatusList();
     List<StudentDetail> studentDetailList = converter.convertStudentDetailList(studentList,

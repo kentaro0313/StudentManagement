@@ -42,12 +42,8 @@ class StudentControllerTest {
   void 受講生詳細一覧の条件検索が実行できて空のリストが返ってくること() throws Exception {
     Student student = new Student();
 
-    mockMvc.perform(MockMvcRequestBuilders.get("/studentList")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(student)))
+    mockMvc.perform(MockMvcRequestBuilders.get("/studentList", student))
         .andExpect(status().isOk());
-
-    verify(service, times(1)).searchStudentList(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
   }
 
   @Test

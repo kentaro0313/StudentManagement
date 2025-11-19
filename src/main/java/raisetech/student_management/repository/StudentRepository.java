@@ -19,7 +19,7 @@ public interface StudentRepository {
    *
    * @return　受講生一覧（全件）
    */
-  List<Student> search(String id, String fullName, String furigana, String handleName, String mailAddress, String area, Integer age, String gender);
+  List<Student> search(Student student);
 
   /**
    * 受講生IDに紐づく受講生の検索を行います。

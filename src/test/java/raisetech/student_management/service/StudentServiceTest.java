@@ -49,17 +49,17 @@ class StudentServiceTest {
     List<StudentCourse> studentCourseList = new ArrayList<>();
     List<StudentCourseStatus> studentCourseStatusList = new ArrayList<>();
     List<StudentDetail> studentDetailList = new ArrayList<>();
-    when(repository.search(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender())).thenReturn(studentList);
+    when(repository.search(student)).thenReturn(studentList);
     when(repository.searchStudentCourseList()).thenReturn(studentCourseList);
     when(repository.searchStudentCourseStatusList()).thenReturn(studentCourseStatusList);
     when(converter.convertStudentDetailList(studentList, studentCourseList,
         studentCourseStatusList)).thenReturn(studentDetailList);
 
     List<StudentDetail> expected = studentDetailList;
-    List<StudentDetail> actual = sut.searchStudentList(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
+    List<StudentDetail> actual = sut.searchStudentList(student);
 
     assertThat(expected).isEqualTo(actual);
-    verify(repository, times(1)).search(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
+    verify(repository, times(1)).search(student);
     verify(repository, times(1)).searchStudentCourseList();
     verify(repository, times(1)).searchStudentCourseStatusList();
     verify(converter, times(1)).convertStudentDetailList(studentList, studentCourseList,
@@ -75,14 +75,14 @@ class StudentServiceTest {
     List<StudentCourse> studentCourseList = new ArrayList<>();
     List<StudentCourseStatus> studentCourseStatusList = new ArrayList<>();
     List<StudentDetail> studentDetailList = new ArrayList<>();
-    when(repository.search(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender())).thenReturn(studentList);
+    when(repository.search(student)).thenReturn(studentList);
     when(repository.searchStudentCourseList()).thenReturn(studentCourseList);
     when(repository.searchStudentCourseStatusList()).thenReturn(studentCourseStatusList);
     when(converter.convertStudentDetailList(studentList, studentCourseList,
         studentCourseStatusList)).thenReturn(studentDetailList);
 
     List<StudentDetail> expected = studentDetailList;
-    List<StudentDetail> actual = sut.searchStudentList(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
+    List<StudentDetail> actual = sut.searchStudentList(student);
 
     Assertions.assertEquals(expected, actual);
   }
@@ -94,14 +94,14 @@ class StudentServiceTest {
     List<StudentCourse> studentCourseList = new ArrayList<>();
     List<StudentCourseStatus> studentCourseStatusList = new ArrayList<>();
     List<StudentDetail> studentDetailList = new ArrayList<>();
-    when(repository.search(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender())).thenReturn(studentList);
+    when(repository.search(student)).thenReturn(studentList);
     when(repository.searchStudentCourseList()).thenReturn(studentCourseList);
     when(repository.searchStudentCourseStatusList()).thenReturn(studentCourseStatusList);
     when(converter.convertStudentDetailList(studentList, studentCourseList,
         studentCourseStatusList)).thenReturn(studentDetailList);
 
     List<StudentDetail> expected = studentDetailList;
-    List<StudentDetail> actual = sut.searchStudentList(student.getId(), student.getFullName(), student.getFurigana(), student.getHandleName(), student.getMailAddress(), student.getArea(), student.getAge(), student.getGender());
+    List<StudentDetail> actual = sut.searchStudentList(student);
 
     Assertions.assertEquals(expected, actual);
   }
