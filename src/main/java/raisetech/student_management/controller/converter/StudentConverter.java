@@ -31,24 +31,28 @@ public class StudentConverter {
     for (Student student : studentList) {
       List<StudentCourseSet> studentCourseSetList = new ArrayList<>();
       StudentDetail studentDetail = new StudentDetail(student, studentCourseSetList);
-      for (StudentCourse studentCourse : studentCourseList) {
-        if (studentCourse.getStudentId().equals(student.getId())) {
-          for (StudentCourseStatus studentCourseStatus : studentCourseStatusList) {
-            if (studentCourseStatus.getCourseId().equals(studentCourse.getCourseId())) {
-              StudentCourseSet studentCourseSet = new StudentCourseSet();
-              studentCourseSet.setStudentCourse(studentCourse);
-              Map<String, StudentCourseStatus> studentCourseStatusMap = new HashMap<>();
-              studentCourseStatusMap.put(studentCourse.getCourseId(), studentCourseStatus);
-              studentCourseSet.setStudentCourseStatusMap(studentCourseStatusMap);
-              studentCourseSetList.add(studentCourseSet);
-            }
-          }
-        }
-      }
+      studentCourseList.stream()
+          .filter(studentCourse -> studentCourse.getStudentId().equals(student.getId())).forEach(
+              studentCourse -> combineStudentCourseInfo(studentCourseStatusList, studentCourse,
+                  studentCourseSetList));
       studentDetail.setStudentCourseSetList(studentCourseSetList);
       studentDetailList.add(studentDetail);
     }
     return studentDetailList;
+  }
+
+  void combineStudentCourseInfo(List<StudentCourseStatus> studentCourseStatusList,
+      StudentCourse studentCourse, List<StudentCourseSet> studentCourseSetList) {
+    studentCourseStatusList.stream().filter(
+        studentCourseStatus -> studentCourseStatus.getCourseId()
+            .equals(studentCourse.getCourseId())).forEach(studentCourseStatus -> {
+      StudentCourseSet studentCourseSet = new StudentCourseSet();
+      studentCourseSet.setStudentCourse(studentCourse);
+      Map<String, StudentCourseStatus> studentCourseStatusMap = new HashMap<>();
+      studentCourseStatusMap.put(studentCourse.getCourseId(), studentCourseStatus);
+      studentCourseSet.setStudentCourseStatusMap(studentCourseStatusMap);
+      studentCourseSetList.add(studentCourseSet);
+    });
   }
 
 }

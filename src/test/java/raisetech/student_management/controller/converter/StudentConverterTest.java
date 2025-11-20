@@ -3,6 +3,7 @@ package raisetech.student_management.controller.converter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +51,21 @@ class StudentConverterTest {
     assertThat(
         actual.get(0).getStudentCourseSetList().get(0).getStudentCourseStatusMap()).isEqualTo(
         studentDetailList.get(0).getStudentCourseSetList().get(0).getStudentCourseStatusMap());
+  }
+
+  @Test
+  void 受講生コース情報とコース申し込み状況を適切に組合わせる() {
+    List<StudentCourseStatus> studentCourseStatusList = new ArrayList<>();
+    StudentCourseStatus studentCourseStatus = new StudentCourseStatus();
+    studentCourseStatus.setCourseId("999");
+    studentCourseStatusList.add(studentCourseStatus);
+    StudentCourse studentCourse = new StudentCourse();
+    studentCourse.setCourseId("999");
+    List<StudentCourseSet> studentCourseSetList = new ArrayList<>();
+
+    sut.combineStudentCourseInfo(studentCourseStatusList, studentCourse, studentCourseSetList);
+
+    assertThat(studentCourseSetList.get(0).getStudentCourse().getCourseId().equals("999"));
   }
 
 
