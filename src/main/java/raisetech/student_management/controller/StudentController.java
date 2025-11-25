@@ -80,6 +80,7 @@ public class StudentController {
   /**
    * 受講生詳細検索です。 IDに紐づく任意の受講生の情報を取得します。
    *
+   *
    * @param id 受講生ID
    * @return　受講生
    */
