@@ -21,8 +21,8 @@ ALB
 
 ER図
 
-![ER Diagram](https://raw.githubusercontent.com/kentaro0313/StudentManagement/blob/main/StudentManagementDB.drawio.png)
 
+![ER Diagram](https://raw.githubusercontent.com/kentaro0313/StudentManagement/main/StudentManagementDB.drawio.png)
 
 
 
