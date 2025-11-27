@@ -15,7 +15,7 @@ ALB
 
 必要な環境変数やコマンド一覧
 
-https://github.com/kentaro0313/StudentManagement/blob/mai/StudentManagement.drawio.png
+![Architecture](https://raw.githubusercontent.com/kentaro0313/StudentManagement/mai/StudentManagement.drawio.png)
 
 ディレクトリ構成
 開発環境の構築方法
