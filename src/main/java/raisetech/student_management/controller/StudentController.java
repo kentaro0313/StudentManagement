@@ -147,7 +147,7 @@ public class StudentController {
    * @return　実行結果
    */
   @Operation(summary = "受講生更新", description = "受講生の情報を更新します",
-      requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      requestBody = @RequestBody(
           description = "受講生情報",
           required = true,
           content = @Content(
