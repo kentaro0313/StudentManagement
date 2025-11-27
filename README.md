@@ -10,8 +10,7 @@
 
 
 
-## サービスURL
-http://StudentManagementALB-187209942.ap-northeast-1.elb.amazonaws.com/studentList
+## 画面動作
 
 
 
