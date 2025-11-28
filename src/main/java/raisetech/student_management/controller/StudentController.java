@@ -3,7 +3,6 @@ package raisetech.student_management.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -100,37 +100,9 @@ public class StudentController {
    * @param studentDetail 受講生詳細
    * @return　実行結果
    */
-  @Operation(summary = "受講生登録", description = "受講生を登録します",
-      requestBody = @RequestBody(
-          description = "受講生情報",
-          required = true,
-          content = @Content(
-              schema = @Schema(implementation = StudentDetail.class),
-              examples = @ExampleObject(
-                  name = "受講生の登録例",
-                  value = "{\n"
-                      + "    \"student\": {\n"
-                      + "        \"fullName\":\"山田　太郎\", \n"
-                      + "        \"furigana\": \"タナカタロウ\",\n"
-                      + "        \"handleName\" : \"タロウ\",\n"
-                      + "        \"mailAddress\" : \"taro@example.com\",\n"
-                      + "        \"area\" : \"東京\",\n"
-                      + "        \"age\" : \"35\",\n"
-                      + "        \"gender\" : \"男性\"\n"
-                      + "    },\n"
-                      + " \"studentCourseSetList\": [\n"
-                      + "        {\n"
-                      + "            \"studentCourse\": {\n"
-                      + "                \"courseName\": \"英語語コース\"\n"
-                      + "            },\n"
-                      + "            \"studentCourseStatusMap\": {}\n"
-                      + "        }\n"
-                      + "    ]\n"
-                      + "}"
-              )
-          )
-      ))
+  @Operation(summary = "受講生登録", description = "受講生を登録します")
   @PostMapping("/registerStudent")
+  @ApiResponse(responseCode = "200", description = "登録処理が完了しました")
   public ResponseEntity<String> registerStudent(
       @Parameter(description = "登録したい受講生の情報")
       @RequestBody @Valid
@@ -146,50 +118,7 @@ public class StudentController {
    * @param studentDetail 受講生詳細
    * @return　実行結果
    */
-  @Operation(summary = "受講生更新", description = "受講生の情報を更新します",
-      requestBody = @RequestBody(
-          description = "受講生情報",
-          required = true,
-          content = @Content(
-              schema = @Schema(implementation = StudentDetail.class),
-              examples = @ExampleObject(
-                  name = "受講生の更新例",
-                  value = "  {\n"
-                      + "        \"student\": {\n"
-                      + "            \"id\": \"999\",\n"
-                      + "            \"fullName\": \"田中太郎\",\n"
-                      + "            \"furigana\": \"タナカタロウ\",\n"
-                      + "            \"handleName\": \"タロウ\",\n"
-                      + "            \"mailAddress\": \"taro@example.com\",\n"
-                      + "            \"area\": \"東京\",\n"
-                      + "            \"age\": 35,\n"
-                      + "            \"gender\": \"男性\",\n"
-                      + "            \"remark\": null,\n"
-                      + "            \"deleted\": false\n"
-                      + "        },\n"
-                      + "        \"studentCourseSetList\": [\n"
-                      + "            {\n"
-                      + "                \"studentCourse\": {\n"
-                      + "                    \"courseId\": \"999\",\n"
-                      + "                    \"studentId\": \"999\",\n"
-                      + "                    \"courseName\": \"英語語コース\",\n"
-                      + "                    \"startDateAt\": \"2025-11-17T21:56:39\",\n"
-                      + "                    \"completeDateAt\": \"2026-11-17T21:56:39\"\n"
-                      + "                },\n"
-                      + "                \"studentCourseStatusMap\": {\n"
-                      + "                    \"28\": {\n"
-                      + "                        \"statusId\": \"999\",\n"
-                      + "                        \"courseId\": \"999\",\n"
-                      + "                        \"courseStatus\": \"本申し込み\"\n"
-                      + "                    }\n"
-                      + "                }\n"
-                      + "            }\n"
-                      + "        ]\n"
-                      + "    }"
-
-              )
-          )
-      ))
+  @Operation(summary = "受講生更新", description = "受講生の情報を更新します")
   @PutMapping("/updateStudent")
   @ApiResponse(responseCode = "200", description = "更新が完了しました")
   public ResponseEntity<String> updateStudent(
