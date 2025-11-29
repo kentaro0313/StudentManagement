@@ -24,7 +24,7 @@ https://github.com/user-attachments/assets/c3b270d9-797e-4389-9833-e992e064d7d7
 
 
 ## 使用している主な技
-java/SpringBoot
+java　21.0.8/SpringBoot 3.5.6
 
 MySQL
 
