@@ -11,18 +11,16 @@
 
 ## 画面動作
 ### 受講生検索＆条件付き検索
-
-![名称_未_設定 (2)](https://github.com/user-attachments/assets/a5495034-6722-4e9c-be68-b99ea0e09724)
-
+![名称_未_設定 (4)](https://github.com/user-attachments/assets/9ef27422-11b0-487c-b64d-abc790de576a)
 
 ### 受講生登録機能
+![名称_未_設定 (5)](https://github.com/user-attachments/assets/5d721369-7e49-4b42-a201-df21f89142c5)
 
-![名称_未_設定 (3)](https://github.com/user-attachments/assets/affcef57-3f6b-466b-9e07-7ca5eea43923)
 ### 受講生更新機能
 ![名称_未_設定 (1)](https://github.com/user-attachments/assets/a3875889-f08d-48ce-9a10-3ce2e4373c7f)
 
-
 ### 受講生削除機能（論理削除）
+![名称_未_設定 (6)](https://github.com/user-attachments/assets/9177f8fb-e5aa-41f9-9de0-d4f47ee50527)
 
 
 
