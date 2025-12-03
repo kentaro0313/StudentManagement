@@ -11,16 +11,14 @@
 
 ## 画面動作
 ### 受講生検索＆条件付き検索
-https://github.com/user-attachments/assets/e58e87bd-6a00-4126-b6b3-8cd22722f1b6
 
+![名称_未_設定 (2)](https://github.com/user-attachments/assets/a5495034-6722-4e9c-be68-b99ea0e09724)
 
 
 ### 受講生登録機能
 
-
+![名称_未_設定 (3)](https://github.com/user-attachments/assets/affcef57-3f6b-466b-9e07-7ca5eea43923)
 ### 受講生更新機能
-https://github.com/user-attachments/assets/24ed39fa-618c-4096-9a2b-eeec09ad2453
-
 ![名称_未_設定 (1)](https://github.com/user-attachments/assets/a3875889-f08d-48ce-9a10-3ce2e4373c7f)
 
 
