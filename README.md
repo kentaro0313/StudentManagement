@@ -9,22 +9,25 @@
 受講生情報の全体検索、条件検索、登録、更新や削除ができます。
 
 
-## 画面動作
+## 動作確認
 ### 受講生検索＆条件付き検索
 ![名称_未_設定 (4)](https://github.com/user-attachments/assets/9ef27422-11b0-487c-b64d-abc790de576a)
+
 
 ### 受講生登録機能
 ![名称_未_設定 (5)](https://github.com/user-attachments/assets/5d721369-7e49-4b42-a201-df21f89142c5)
 
+
 ### 受講生更新機能
 ![名称_未_設定 (1)](https://github.com/user-attachments/assets/a3875889-f08d-48ce-9a10-3ce2e4373c7f)
+
 
 ### 受講生削除機能（論理削除）
 ![名称_未_設定 (6)](https://github.com/user-attachments/assets/9177f8fb-e5aa-41f9-9de0-d4f47ee50527)
 
 
 
-## 使用している主な技
+## 使用している主な技術
 java　21.0.8/SpringBoot 3.5.6
 
 MySQL
